@@ -1,24 +1,37 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
+import Msite from "./pages/msite/Msite";
+import Order from "./pages/order/Order";
+import Profile from "./pages/profile/Profile";
+import Search from "./pages/search/Search";
 
 Vue.use(Router);
 
 export default new Router({
-  routes: [
-    {
-      path: "/",
-      name: "home",
-      component: Home
-    },
-    {
-      path: "/about",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")
-    }
-  ]
+    routes: [
+        {
+            path: "/",
+            redirect: "/msite"
+        },
+        {
+            path: "/msite",
+            name: "msite",
+            component: Msite
+        },
+        {
+            path: "/order",
+            name: "order",
+            component: Order
+        },
+        {
+            path: "/profile",
+            name: "profile",
+            component: Profile
+        },
+        {
+            path: "/search",
+            name: "search",
+            component: Search
+        }
+    ]
 });
