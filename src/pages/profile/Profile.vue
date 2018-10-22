@@ -1,28 +1,24 @@
 <template>
     <div class="profile">
-        <header class="header">
-            <a class="header_title">
-                <span class="header_title_text">我的</span>
-            </a>
-        </header>
+        <header-top title="我的"></header-top>
         <section class="profile-number">
-            <a href="javascript:" class="profile-link">
+            <router-link to="/login" class="profile-link">
                 <div class="profile_image">
                     <i class="iconfont icon-person"></i>
                 </div>
                 <div class="user-info">
                     <p class="user-info-top">登录/注册</p>
                     <p>
-                <span class="user-icon">
-                  <i class="iconfont icon-shouji icon-mobile"></i>
-                </span>
+                        <span class="user-icon">
+                          <i class="iconfont icon-shouji icon-mobile"></i>
+                        </span>
                         <span class="icon-mobile-number">暂无绑定手机号</span>
                     </p>
                 </div>
                 <span class="arrow">
-              <i class="iconfont icon-jiantou1"></i>
-            </span>
-            </a>
+                    <i class="iconfont icon-jiantou1"></i>
+                </span>
+            </router-link>
         </section>
         <section class="profile_info_data border-1px">
             <ul class="info_data_list">
@@ -96,7 +92,13 @@
 </template>
 
 <script>
-    export default {}
+    import HeaderTop from "../../components/headerTop/HeaderTop";
+
+    export default {
+        components: {
+            "header-top": HeaderTop
+        }
+    }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
@@ -104,45 +106,7 @@
 
     .profile //我的
         width 100%
-        .header
-            background-color #02a774
-            position fixed
-            z-index 100
-            left 0
-            top 0
-            width 100%
-            height 45px
-            .header_search
-                position absolute
-                left 15px
-                top 50%
-                transform translateY(-50%)
-                width 10%
-                height 50%
-                .icon-sousuo
-                    font-size 25px
-                    color #fff
-            .header_title
-                position absolute
-                top 50%
-                left 50%
-                transform translate(-50%, -50%)
-                width 50%
-                color #fff
-                text-align center
-                .header_title_text
-                    font-size 20px
-                    color #fff
-                    display block
-            .header_login
-                font-size 14px
-                color #fff
-                position absolute
-                right 15px
-                top 50%
-                transform translateY(-50%)
-                .header_login_text
-                    color #fff
+        overflow hidden
         .profile-number
             margin-top 45.5px
             .profile-link
@@ -183,6 +147,7 @@
                         .icon-mobile-number
                             font-size 14px
                             color #fff
+                            margin-left 5px
                 .arrow
                     width 12px
                     height 12px
