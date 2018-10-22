@@ -5,11 +5,11 @@
                 <span class="header_title_text">订单列表</span>
             </a>
         </header>
-        <section class="order_no_login">
-            <img src="./images/person.png">
-            <h3>登录后查看外卖订单</h3>
-            <button>立即登陆</button>
-        </section>
+        <div class="order_no_login">
+            <img src="./images/person.png"/>
+            <h3>登陆后查看外卖订单</h3>
+            <button>立即登录</button>
+        </div>
     </div>
 </template>
 
@@ -64,16 +64,16 @@
                 .header_login_text
                     color #fff
         .order_no_login
-            padding-top 140px
-            width 60%
+            padding-top: 140px
             margin 0 auto
-            text-align center
+            width 60%
+            text-align: center
             >img
                 display block
                 width 100%
                 height 30%
             >h3
-                padding 10px 0
+                padding  10px 0
                 font-size 17px
                 color #6a6a6a
             >button
@@ -85,4 +85,5 @@
                 outline none
                 border-radius 5px
                 padding 10px 20px
+
 </style>
