@@ -25,16 +25,16 @@
     .order  //订单
         width 100%
         .order_no_login
-            padding-top 140px
-            width 60%
+            padding-top: 140px
             margin 0 auto
-            text-align center
+            width 60%
+            text-align: center
             >img
                 display block
                 width 100%
                 height 30%
             >h3
-                padding 10px 0
+                padding  10px 0
                 font-size 17px
                 color #6a6a6a
             >button
@@ -46,4 +46,5 @@
                 outline none
                 border-radius 5px
                 padding 10px 20px
+
 </style>
