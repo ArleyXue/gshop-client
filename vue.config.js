@@ -11,7 +11,7 @@ module.exports = {
             title: 'Index Page',// 当使用 title 选项时,在 template 中使用：<title><%= htmlWebpackPlugin.options.title %></title>
             chunks: ['chunk-vendors', 'chunk-common', 'index'] // 在这个页面中包含的块，默认情况下会包含,提取出来的通用 chunk 和 vendor chunk
         },
-        subpage: 'src/main.js'//官方解释：当使用只有入口的字符串格式时,模板会被推导为'public/subpage.html',若找不到就回退到'public/index.html',输出文件名会被推导为'subpage.html'
+        //subpage: 'src/main.js'//官方解释：当使用只有入口的字符串格式时,模板会被推导为'public/subpage.html',若找不到就回退到'public/index.html',输出文件名会被推导为'subpage.html'
     },
     lintOnSave: true,// 是否在保存的时候检查
     productionSourceMap: true,// 生产环境是否生成 sourceMap 文件
@@ -22,19 +22,19 @@ module.exports = {
         modules: false// 启用 CSS modules for all css / pre-processor files.
     },
     devServer: {// 环境配置
-        host: '0.0.0.0',
+        host: 'localhost',
         port: 8088,
         https: false,
         hotOnly: false,
         open: true, //配置自动启动浏览器
         proxy: {// 配置多个代理(配置一个 proxy: 'http://localhost:4000' )
             '/api': {
-                target: '<url>',
+                target: 'http://localhost:4000',
                 ws: true,
-                changeOrigin: true
-            },
-            '/foo': {
-                target: '<other_url>'
+                changeOrigin: true, // 支持跨域
+                pathRewrite: { // 重写路径, 去掉开头的'/api'
+                    '^/api': ''
+                }
             }
         }
     },

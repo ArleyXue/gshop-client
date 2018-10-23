@@ -1,13 +1,13 @@
 /*
     请求接口
  */
-import ajax from "./ajax.js";
+import ajax from "./ajax";
 
-const host = "http://localhost:4000";
+const BASE_URL = "/api";
 // 1、根据经纬度获取位置详情
-export const reqAddress = geohash => ajax(host + "/position/" + geohash);
+export const reqAddress = geohash => ajax(BASE_URL + "/position/" + geohash);
 // 2、获取食品分类列表
-export const reqFoodTypeList = () => ajax("/index_category");
+export const reqFoodTypeList = () => ajax(BASE_URL + "/index_category");
 // 3、根据经纬度获取商铺列表
 export const reqShopList = (longitude, latitud) => ajax("/index_category", { longitude, latitud });
 // 4、根据经纬度和关键字搜索商铺列表

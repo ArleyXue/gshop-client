@@ -1,9 +1,9 @@
 /*
    发起异步请求
  */
-import axios from "ajax";
+import axios from "axios";
 
-export default function ajax(url, data = {}, type = "GET") {
+export default function ajaxax(url, data = {}, type = "POST") {
     return new Promise(function (resolve, reject) {
         let promise;
         if ("GET" === type) {

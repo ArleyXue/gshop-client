@@ -7,11 +7,15 @@
 
 <script>
 import FooterGuide from "./components/footerGuide/FooterGuide";
-
+import {reqFoodTypeList} from "./api";
 export default {
-  components: {
-    "footer-guide": FooterGuide
-  }
+    mounted() {
+        const result =  reqFoodTypeList();
+        console.log(result);
+    },
+    components: {
+        "footer-guide": FooterGuide
+    }
 };
 </script>
 
