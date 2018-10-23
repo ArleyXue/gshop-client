@@ -8,11 +8,11 @@
 <script>
 import FooterGuide from "./components/footerGuide/FooterGuide";
 
-    export default {
-        components: {
-            "footer-guide": FooterGuide,
-        }
-    }
+export default {
+  components: {
+    "footer-guide": FooterGuide
+  }
+};
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
