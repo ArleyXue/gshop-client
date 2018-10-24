@@ -3,7 +3,7 @@
  */
 import axios from "axios";
 
-export default function ajaxax(url, data = {}, type = "POST") {
+export default function ajaxax(url, data = {}, type = "GET") {
     return new Promise(function (resolve, reject) {
         let promise;
         if ("GET" === type) {
