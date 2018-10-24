@@ -141,6 +141,7 @@
     import {mapState} from "vuex";
     import HeaderTop from "../../components/headerTop/HeaderTop";
     import ShopList from "../../components/shopList/ShopList";
+    import {mapState} from "vuex"
 
 
     export default {
@@ -152,6 +153,9 @@
                 }
             });
             this.$store.dispatch("getAddress")
+        },
+        computed: {
+            ...mapState(['address'])
         },
         computed: {
             ...mapState(['address'])

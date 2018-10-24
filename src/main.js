@@ -11,7 +11,7 @@ import "./assets/css/reset.css";
 Vue.config.productionTip = false;
 
 new Vue({
-  router,
-  store,
+  router, // 使用路由 vue-router
+  store, // 使用vuex
   render: h => h(App)
 }).$mount("#app");
