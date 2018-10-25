@@ -15,10 +15,10 @@
         </header-top>
         <!--首页导航-->
         <nav class="msite_nav">
-            <div class="swiper-container">
+            <div class="swiper-container" v-if="foodTypeList.length > 0">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide" v-for="(foodTypeList, index) of foodTypeListArr">
-                        <a href="javascript:" class="link_to_food" v-for="(foodType, index) of foodTypeList">
+                    <div class="swiper-slide" v-for="(foodTypeList, index) in foodTypeListArr" :key="index">
+                        <a href="javascript:" class="link_to_food" v-for="(foodType, index) of foodTypeList" :key="index">
                             <div class="food_container">
                                 <img :src="imgBaseUrl + foodType.image_url">
                             </div>
@@ -28,6 +28,9 @@
                 </div>>
                 <!-- Add Pagination -->
                 <div class="swiper-pagination"></div>
+            </div>
+            <div v-else>
+                <img src="./images/msite_back.svg" alt="back" />
             </div>
         </nav>
         <!--首页附近商家-->
@@ -60,6 +63,7 @@
         mounted() {
             this.$store.dispatch("getAddress");
             this.$store.dispatch("listFoodType");
+            this.$store.dispatch("listShop");
         },
         computed: {
             ...mapState(['address', 'foodTypeList']),
