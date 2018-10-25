@@ -5,9 +5,9 @@
 </template>
 
 <script>
-    const CLASS_ON = 'on'
-    const CLASS_HALF = 'half'
-    const CLASS_OFF = 'off'
+    const CLASS_ON = 'on';
+    const CLASS_HALF = 'half';
+    const CLASS_OFF = 'off';
     export default {
         props: {
             score: Number,
