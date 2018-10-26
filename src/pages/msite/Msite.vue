@@ -3,13 +3,18 @@
         <!--首页头部-->
         <header-top :title="address.name">
             <slot slot="left">
-                <span class="header_search">
+                <router-link to="/search" class="header_search">
                     <i class="iconfont icon-sousuo"></i>
-                </span>
+                </router-link>
             </slot>
             <slot slot="right">
-                <span class="header_login">
+                <span class="header_login" v-if="!userInfo._id">
                     <span class="header_login_text">登录|注册</span>
+                </span>
+                <span class="header_login" v-else>
+                    <router-link to="/profile" class="header_login_text">
+                        <i class="iconfont icon-person"></i>
+                    </router-link>
                 </span>
             </slot>
         </header-top>
@@ -61,12 +66,11 @@
             }
         },
         mounted() {
-            this.$store.dispatch("getAddress");
             this.$store.dispatch("listFoodType");
             this.$store.dispatch("listShop");
         },
         computed: {
-            ...mapState(['address', 'foodTypeList']),
+            ...mapState(['address', 'foodTypeList', 'userInfo']),
             foodTypeListArr () {
                 const foodTypeList = this.foodTypeList;
                 const foodTypeListArr = [];

@@ -10,7 +10,8 @@ import FooterGuide from "./components/footerGuide/FooterGuide";
 
 export default {
     mounted() {
-
+        this.$store.dispatch("getAddress");
+        this.$store.dispatch("getUserInfo");
     },
     components: {
         "footer-guide": FooterGuide

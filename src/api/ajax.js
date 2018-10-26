@@ -2,6 +2,7 @@
    发起异步请求
  */
 import axios from "axios";
+axios.defaults.withCredentials = true;
 
 export default function ajaxax(url, data = {}, type = "GET") {
     return new Promise(function (resolve, reject) {

@@ -40,8 +40,9 @@
                                 </div>
                             </section>
                             <section class="login_message">
-                                <input type="text" maxlength="11" placeholder="验证码">
-                                <img class="get_verification" src="http://localhost:4000/captcha" alt="captcha" v-model="captcha" @click="getCaptcha">
+                                <input type="text" maxlength="11" placeholder="验证码" v-model="captcha">
+                                <img class="get_verification" src="http://localhost:4000/captcha" alt="captcha"
+                                      @click="getCaptcha" ref="captcha">
                             </section>
                         </section>
                     </div>
@@ -60,6 +61,7 @@
 
 <script>
     import AlertTip from "../../components/alertTip/AlertTip"
+    import {reqLoginSms, reqLoginPwd, reqSendCode} from "../../api"
 
     export default {
         data() {
@@ -82,7 +84,7 @@
             }
         },
         methods: {
-            sendCode() {
+            async sendCode() {
                 // 如果计时器正在执行, 直接return
                 if (this.countdown !== 0) {
                     return;
@@ -95,33 +97,59 @@
                         // 停止计时器
                         clearInterval(intervalId);
                     }
-                }, 1000)
+                }, 1000);
                 // 发送请求获取验证码
+                const result = await reqSendCode(this.phone);
+
             },
-            login() { // 登陆
+            async login() { // 登陆
+                let result;
                 // 校验表单
                 if (this.isCodeLogin) {
                     const {rightPhone, phone, code} = this;
                     if (!rightPhone) {
                         // 提示手机号不正确
                         this.showTip('手机号不正确');
+                        return;
                     } else if (!/^\d{6}$/.test(code)) {
                         // 提示验证码不是6位
                         this.showTip('验证码不是6位');
+                        return;
                     }
-
+                    // 验证码登录
+                    result = await reqLoginSms(phone, code);
                 } else {
                     const {name, pwd, captcha} = this;
                     if (!name) {
                         // 提示用户名不能为空
                         this.showTip('用户名不能为空');
+                        return;
                     } else if (!pwd) {
                         // 提示密码不能为空
                         this.showTip('密码不能为空');
+                        return;
                     } else if (!captcha) {
                         // 提示验证码不能为空
                         this.showTip('验证码不能为空');
+                        return;
                     }
+                    // 密码登录
+                    result = await reqLoginPwd({name, pwd, captcha});
+                }
+                if (result.code === 0) {
+                    // 成功
+                    const user = result.data;
+                    // 保存用户信息
+                    this.$store.dispatch("saveUserInfo", user);
+                    // 跳转到我的页面
+                    this.$router.replace("/profile");
+                } else {
+                    // 失败
+                    const msg = result.msg;
+                    // 刷新验证码
+                    this.getCaptcha();
+                    // 提示消息
+                    this.showTip(msg);
                 }
             },
             showTip(alertText) { // 显示弹出框
@@ -132,8 +160,8 @@
                 this.alertShow = false;
                 this.alertText = '';
             },
-            getCaptcha(event) {
-                event.target.src = "http://localhost:4000/captcha?time" + Date.now();
+            getCaptcha() {
+                this.$refs.captcha.src = "http://localhost:4000/captcha?time" + Date.now();
             }
         },
         components: {

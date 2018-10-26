@@ -14,4 +14,7 @@ export default {
     [types.RECEIVE_SHOP_List] (state, {shopList}) {
         state.shopList = shopList;
     },
+    [types.RECEIVE_USER_INFO] (state, {userInfo}) {
+        state.userInfo = userInfo;
+    },
 }
