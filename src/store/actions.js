@@ -8,7 +8,10 @@ import {
     reqFoodTypeList,
     reqShopList,
     reqUserInfo,
-    reqLogout
+    reqLogout,
+    reqShopGoods,
+    reqShopRatings,
+    reqShopInfo
 } from "../api"
 
 export default {
@@ -68,6 +71,33 @@ export default {
             const userInfo = {}; // 重置用户信息
 
             commit(types.RECEIVE_USER_INFO, {userInfo});
+        }
+    },
+
+    // 异步获取商品信息
+    async listShopGoods({commit}) {
+        const result = await reqShopGoods();
+        if (0 === result.code) {
+            const shopGoods = result.data;
+            commit(types.RECEIVE_SHOP_GOODS, {shopGoods});
+        }
+    },
+
+    // 异步获取评论信息
+    async listShopRatings({commit}) {
+        const result = await reqShopRatings();
+        if (0 === result.code) {
+            const shopRatings = result.data;
+            commit(types.RECEIVE_SHOP_RATINGS, {shopRatings});
+        }
+    },
+
+    // 异步获取商户信息
+    async listShopInfo({commit}) {
+        const result = await reqShopInfo();
+        if (0 === result.code) {
+            const shopInfo = result.data;
+            commit(types.RECEIVE_SHOP_INFO, {shopInfo});
         }
     }
 }

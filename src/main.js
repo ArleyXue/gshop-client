@@ -6,8 +6,9 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import {Button} from "mint-ui";
+import "./mock/mockServer";
 
-import "./assets/css/reset.css";
+import "../src/assets/css/reset.css";
 
 Vue.config.productionTip = false;
 Vue.component(Button.name, Button); // 全局mint-ui按钮

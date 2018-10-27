@@ -3,6 +3,9 @@
  */
 
 import * as types from "./mutation-type"
+import {RECEIVE_SHOP_INFO} from "./mutation-type";
+import {RECEIVE_SHOP_RATINGS} from "./mutation-type";
+import {RECEIVE_SHOP_GOODS} from "./mutation-type";
 
 export default {
     [types.RECEIVE_ADDRESS] (state, {address}) {
@@ -16,5 +19,14 @@ export default {
     },
     [types.RECEIVE_USER_INFO] (state, {userInfo}) {
         state.userInfo = userInfo;
+    },
+    [RECEIVE_SHOP_INFO](state, {shopInfo}) {
+        state.shop_info = shopInfo
+    },
+    [RECEIVE_SHOP_RATINGS](state, {shopRatings}) {
+        state.shop_ratings = shopRatings
+    },
+    [RECEIVE_SHOP_GOODS](state, {shopGoods}) {
+        state.shop_goods = shopGoods
     },
 }
