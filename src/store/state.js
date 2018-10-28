@@ -9,7 +9,7 @@ export default {
     foodTypeList: [], // 分类数组
     shopList: [], // 商家数组
     userInfo: {}, // 用户信息
-    goods: [], // 商品列表
-    ratings: [], // 商家评价列表
-    info: {}, // 商家信息
+    shopGoods: [], // 商品列表
+    shopRatings: [], // 商家评价列表
+    shopInfo: {}, // 商家信息
 }

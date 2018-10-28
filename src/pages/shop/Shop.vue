@@ -22,7 +22,6 @@
 
     export default {
         mounted() {
-            this.$store.dispatch('listShopGoods');
             this.$store.dispatch('listShopRatings');
             this.$store.dispatch('listShopInfo');
         },

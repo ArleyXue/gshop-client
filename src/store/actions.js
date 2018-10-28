@@ -75,11 +75,12 @@ export default {
     },
 
     // 异步获取商品信息
-    async listShopGoods({commit}) {
+    async listShopGoods({commit}, callback) {
         const result = await reqShopGoods();
         if (0 === result.code) {
             const shopGoods = result.data;
             commit(types.RECEIVE_SHOP_GOODS, {shopGoods});
+            callback && callback();
         }
     },
 

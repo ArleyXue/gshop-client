@@ -21,12 +21,12 @@ export default {
         state.userInfo = userInfo;
     },
     [RECEIVE_SHOP_INFO](state, {shopInfo}) {
-        state.shop_info = shopInfo
+        state.shopInfo = shopInfo
     },
     [RECEIVE_SHOP_RATINGS](state, {shopRatings}) {
-        state.shop_ratings = shopRatings
+        state.shopRatings = shopRatings
     },
     [RECEIVE_SHOP_GOODS](state, {shopGoods}) {
-        state.shop_goods = shopGoods
+        state.shopGoods = shopGoods
     },
 }
