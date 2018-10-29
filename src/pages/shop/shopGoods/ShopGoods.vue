@@ -32,7 +32,7 @@
                                         <span class="old" v-if="food.oldPrice">￥{{food.oldPrice}}</span>
                                     </div>
                                     <div class="cartcontrol-wrapper">
-                                        <cart-control></cart-control>
+                                        <cart-control :food="food"></cart-control>
                                     </div>
                                 </div>
                             </li>

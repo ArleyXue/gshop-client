@@ -1,17 +1,31 @@
 <template>
     <div class="cartcontrol">
-        <div class="iconfont icon-remove_circle_outline"></div>
-        <div class="cart-count">1</div>
-        <div class="iconfont icon-add_circle"></div>
+        <transition name="move">
+            <div class="iconfont icon-remove_circle_outline" v-show="food.count" @click="updateFoodCount(false)"></div>
+        </transition>
+        <div class="cart-count" v-show="food.count">{{food.count}}</div>
+        <div class="iconfont icon-add_circle" @click="updateFoodCount(true)"></div>
     </div>
 </template>
 
 <script>
-    export default {}
+    export default {
+        props:{
+            food: Object
+        },
+
+        methods: {
+            updateFoodCount(isAdd) {
+                this.$store.dispatch('updateFoodCount', {isAdd, food: this.food})
+            }
+        }
+    }
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+
     @import "../../common/stylus/mixins.styl"
+
     .cartcontrol
         font-size: 0
         .cart-decrease
@@ -20,7 +34,6 @@
             line-height: 24px
             font-size: 24px
             color: rgb(0, 160, 220)
-
         .icon-remove_circle_outline
             display: inline-block
             padding 6px

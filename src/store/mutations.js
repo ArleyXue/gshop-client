@@ -1,11 +1,9 @@
 /*
 直接更新state的多个方法
  */
-
+import Vue from "vue"
 import * as types from "./mutation-type"
-import {RECEIVE_SHOP_INFO} from "./mutation-type";
-import {RECEIVE_SHOP_RATINGS} from "./mutation-type";
-import {RECEIVE_SHOP_GOODS} from "./mutation-type";
+
 
 export default {
     [types.RECEIVE_ADDRESS] (state, {address}) {
@@ -20,13 +18,27 @@ export default {
     [types.RECEIVE_USER_INFO] (state, {userInfo}) {
         state.userInfo = userInfo;
     },
-    [RECEIVE_SHOP_INFO](state, {shopInfo}) {
+    [types.RECEIVE_SHOP_INFO](state, {shopInfo}) {
         state.shopInfo = shopInfo
     },
-    [RECEIVE_SHOP_RATINGS](state, {shopRatings}) {
+    [types.RECEIVE_SHOP_RATINGS](state, {shopRatings}) {
         state.shopRatings = shopRatings
     },
-    [RECEIVE_SHOP_GOODS](state, {shopGoods}) {
+    [types.RECEIVE_SHOP_GOODS](state, {shopGoods}) {
         state.shopGoods = shopGoods
+    },
+
+    [types.INCREMENT_FOOD_COUNT](state, {food}) {
+        if (!food.count) {
+            // food.count = 1;
+            Vue.set(food, "count", 1);
+        } else {
+            food.count++;
+        }
+    },
+    [types.DECREMENT_FOOD_COUNT](state, {food}) {
+        if (food.count) {
+            food.count--;
+        }
     },
 }

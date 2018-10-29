@@ -100,5 +100,14 @@ export default {
             const shopInfo = result.data;
             commit(types.RECEIVE_SHOP_INFO, {shopInfo});
         }
+    },
+
+    // 同步更细food的count
+    updateFoodCount({commit}, {isAdd, food}) {
+        if (isAdd) {
+            commit(types.INCREMENT_FOOD_COUNT, {food});
+        } else {
+            commit(types.DECREMENT_FOOD_COUNT, {food});
+        }
     }
 }
