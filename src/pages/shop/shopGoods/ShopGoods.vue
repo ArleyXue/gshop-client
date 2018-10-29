@@ -3,7 +3,8 @@
         <div class="goods">
             <div class="menu-wrapper" ref="menuWrapper">
                 <ul>
-                    <li class="menu-item" :class="{current: index === currentIndex}" v-for="(goods, index) in shopGoods" :key="index">
+                    <li class="menu-item" :class="{current: index === currentIndex}"
+                        v-for="(goods, index) in shopGoods" :key="index" @click="clickManuItem(index)">
                         <span class="text bottom-border-1px">
                             <img class="icon" :src="goods.icon" v-if="goods.icon">
                             {{goods.name}}
@@ -31,7 +32,7 @@
                                         <span class="old" v-if="food.oldPrice">￥{{food.oldPrice}}</span>
                                     </div>
                                     <div class="cartcontrol-wrapper">
-                                        CartControl
+                                        <cart-control></cart-control>
                                     </div>
                                 </div>
                             </li>
@@ -45,7 +46,8 @@
 
 <script>
     import {mapState} from "vuex"
-    import BScroll from 'better-scroll'
+    import BScroll from "better-scroll"
+    import CartControl from "../../../components/cartControl/CartControl"
 
     export default {
         data() {
@@ -56,7 +58,7 @@
         },
         mounted () {
             this.$store.dispatch('listShopGoods', () => {
-                this.$nextTick(() => { // 加载better-scroll
+                this.$nextTick(() => {
                     this._initScroll();
                     this._initTop();
                 })
@@ -64,18 +66,34 @@
         },
         computed: {
             ...mapState(['shopGoods']),
-            currentIndex() {
 
+            currentIndex() { // 计算index索引
+                let {scrollY, tops} = this;
+                return tops.findIndex((top, index) => {
+                    return scrollY >= top && scrollY < tops[index + 1];
+                });
             }
         },
+        components: {
+            CartControl
+        },
         methods: {
-            _initScroll() {
-                new BScroll('.menu-wrapper');
-                let foodsScroll = new BScroll('.foods-wrapper', {
-                    probeType: 2
+            _initScroll() { // 加载better-scroll
+                new BScroll('.menu-wrapper', {
+                    click: true
                 });
-                // 绑定时间 监听实时scrollY
-                foodsScroll.on('scroll', (x, y) => {
+                this.foodsScroll = new BScroll('.foods-wrapper', {
+                    probeType: 2,
+                    click: true
+                });
+
+                // 绑定右侧 监听实时scrollY
+                this.foodsScroll.on('scroll', ({x, y}) => {
+                    this.scrollY = Math.abs(y);
+                });
+
+                // 绑定右侧 滚动结束的scrollY
+                this.foodsScroll.on('scrollEnd', ({x, y}) => {
                     this.scrollY = Math.abs(y);
                 });
             },
@@ -89,6 +107,11 @@
                    tops.push(top);
                 });
                 this.tops = tops;
+            },
+            clickManuItem(index) {
+                let scrollY = this.tops[index];
+                this.scrollY = scrollY;
+                this.foodsScroll.scrollTo(0, -scrollY, 300);
             }
         }
     }
