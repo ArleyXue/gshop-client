@@ -1,9 +1,18 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Msite from "./pages/msite/Msite";
+
+
+/*import Msite from "./pages/msite/Msite";
 import Order from "./pages/order/Order";
 import Profile from "./pages/profile/Profile";
-import Search from "./pages/search/Search";
+import Search from "./pages/search/Search";*/
+
+const Msite = () => import("./pages/msite/Msite");
+const Order = () => import("./pages/order/Order");
+const Profile = () => import("./pages/profile/Profile");
+const Search = () => import("./pages/search/Search");
+
+
 import Login from "./pages/login/Login";
 import Shop from "./pages/shop/Shop";
 import ShopGoods from "./pages/shop/shopGoods/ShopGoods";

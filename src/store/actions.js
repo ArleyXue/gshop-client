@@ -11,7 +11,8 @@ import {
     reqLogout,
     reqShopGoods,
     reqShopRatings,
-    reqShopInfo
+    reqShopInfo,
+    reqSearchShopList
 } from "../api"
 
 export default {
@@ -85,11 +86,12 @@ export default {
     },
 
     // 异步获取评论信息
-    async listShopRatings({commit}) {
+    async listShopRatings({commit}, callback) {
         const result = await reqShopRatings();
         if (0 === result.code) {
             const shopRatings = result.data;
             commit(types.RECEIVE_SHOP_RATINGS, {shopRatings});
+            callback && callback();
         }
     },
 
@@ -102,6 +104,16 @@ export default {
         }
     },
 
+    // 异步搜索商家
+    async listShopByQuery({commit, state}, keyword) {
+        const geohash = state.latitude + "," + state.longitude;
+        const result = await reqSearchShopList(keyword, geohash);
+        if (0 === result.code) {
+            const shopList = result.data;
+            commit(types.RECEIVE_SEARCH_SHOP_LIST, {shopList});
+        }
+    },
+
     // 同步更细food的count
     updateFoodCount({commit}, {isAdd, food}) {
         if (isAdd) {
@@ -109,5 +121,10 @@ export default {
         } else {
             commit(types.DECREMENT_FOOD_COUNT, {food});
         }
+    },
+
+    // 同步清除购物车
+    clearCartFoods({commit}) {
+        commit(types.CLEAR_CART_FOODS)
     }
 }

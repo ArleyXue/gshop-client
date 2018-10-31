@@ -12,3 +12,5 @@ export const RECEIVE_SHOP_INFO = 'receive_shop_info'; // 接收商家信息
 
 export const INCREMENT_FOOD_COUNT = 'increment_food_count'; // 增加食物数量
 export const DECREMENT_FOOD_COUNT = 'decrement_food_count'; // 减少食物数量
+export const CLEAR_CART_FOODS = 'clear_cart_foods'; // 清除购物车
+export const RECEIVE_SEARCH_SHOP_LIST = 'receive_search_shop_list'; // 接收搜索的商家

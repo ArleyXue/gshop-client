@@ -25,7 +25,7 @@
                     <div class="swiper-slide" v-for="(foodTypeList, index) in foodTypeListArr" :key="index">
                         <a href="javascript:" class="link_to_food" v-for="(foodType, index) of foodTypeList" :key="index">
                             <div class="food_container">
-                                <img :src="imgBaseUrl + foodType.image_url">
+                                <img v-lazy="imgBaseUrl + foodType.image_url">
                             </div>
                             <span>{{foodType.title}}</span>
                         </a>

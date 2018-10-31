@@ -12,4 +12,6 @@ export default {
     shopGoods: [], // 商品列表
     shopRatings: [], // 商家评价列表
     shopInfo: {}, // 商家信息
+    cartFoods: [], // 购物车食物
+    searchShopList: [] // 搜索的商家
 }
